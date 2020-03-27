@@ -6,10 +6,10 @@ repo_suffix = ".git"
 
 m4_version := 1.4.18
 autoconf_version := 2.69
-automake_version := 1.16.1
+automake_version := 1.16.2
 automake_api_version := 1.16
 libtool_version := 2.4.6
-gettext_version := 0.19.8.1
+gettext_version := 0.20.1
 
 gnu_mirror := saimei.ftp.acc.umu.se/mirror/gnu.org/gnu
 
