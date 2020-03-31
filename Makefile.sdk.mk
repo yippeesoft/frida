@@ -253,7 +253,7 @@ build/.$1-stamp:
 
 build/fs-tmp-%/$1/build.ninja: build/fs-env-$(build_platform_arch).rc build/fs-env-%.rc build/.$1-stamp $3 releng/meson/meson.py
 	$(RM) -r $$(@D)
-	(. build/fs-meson-env-$(build_platform_arch).rc \
+	(. build/fs-meson-env-$$*.rc \
 		&& . build/fs-config-$$*.site \
 		&& if [ $$* = $(build_platform_arch) ]; then \
 			cross_args=""; \

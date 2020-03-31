@@ -890,6 +890,24 @@ case $host_platform in
 esac
 
 egrep -v "^export LD=" "$env_rc" > "$meson_env_rc"
+(
+  echo "export CC_LD=\"$LD\""
+  echo "export CXX_LD=\"$LD\""
+) >> $meson_env_rc
+case $host_platform in
+  macos|ios)
+    (
+      echo "export OBJC_LD=\"$LD\""
+      echo "export OBJCXX_LD=\"$LD\""
+    ) >> $meson_env_rc
+    ;;
+esac
+if [ "$host_platform" != "$build_platform" ]; then
+  build_env_rc=build/${FRIDA_ENV_NAME:-frida}-meson-env-${build_platform_arch}.rc
+  egrep "^export (PKG_CONFIG_PATH|CC|CXX|OBJC|OBJCXX|CPPFLAGS|CFLAGS|CXXFLAGS|CC_LD|CXX_LD|OBJC_LD|OBJCXX_LD|LDFLAGS|AR)=" $build_env_rc \
+    | sed -e "s,=,_FOR_BUILD=," \
+    >> $meson_env_rc
+fi
 
 sed \
   -e "s,@frida_host_platform@,$host_platform,g" \
